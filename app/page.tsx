@@ -27,6 +27,32 @@ export default function Home() {
   const [dYourTimezone, setDYourTimezone] = useState("");
   const [dRelative, setDRelative] = useState("");
   const [copied, setCopied] = useState(false);
+  const [tableCopied, setTableCopied] = useState(false);
+
+  const languages = [
+    { name: 'Swift', code: 'NSDate().timeIntervalSince1970' },
+    { name: 'Go', code: 'int64(time.Now().Unix())' },
+    { name: 'Java', code: 'System.currentTimeMillis() / 1000' },
+    { name: 'JavaScript', code: 'Math.round(new Date() / 1000)' },
+    { name: 'Objective-C', code: '[[NSDate date] timeIntervalSince1970]' },
+    { name: 'MySQL', code: 'SELECT unix_timestamp(now())' },
+    { name: 'SQLite', code: "SELECT strftime('%s', 'now')" },
+    { name: 'Erlang', code: 'calendar:datetime_to_gregorian_seconds(calendar:universal_time())-719528*24*3600.' },
+    { name: 'PHP', code: 'time()' },
+    { name: 'Python', code: 'time.time()' },
+    { name: 'Ruby', code: 'Time.now.to_i' },
+    { name: 'Shell', code: 'date +%s' },
+    { name: 'Groovy', code: '(new Date().time / 1000).longValue()' },
+    { name: 'Lua', code: 'os.time()' },
+    { name: '.NET/C#', code: 'DateTimeOffset.UtcNow.ToUnixTimeSeconds();' },
+    { name: 'Dart', code: '(new DateTime.now().millisecondsSinceEpoch / 1000).truncate()' }
+  ];
+  
+    const copyToClipboard = (code) => {
+      navigator.clipboard.writeText(code);
+      setTableCopied(true);
+      setTimeout(() => setTableCopied(false), 1000); // 1秒后复制状态重置
+    };
 
   const handleTimestampChange = useCallback(() => {
     const timestampValue = parseInt(timestamp);
@@ -491,6 +517,28 @@ export default function Home() {
           </tbody>
         </table>
       )}
+
+        <div className="overflow-x-auto">
+        <table className="min-w-full leading-normal">
+          <tbody>
+            {languages.map((lang, idx) => (
+              <tr key={idx}>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  {lang.name}
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <div className="flex justify-between">
+                    <code>{lang.code}</code>
+                    <button onClick={() => copyToClipboard(lang.code)} className="text-blue-500 hover:text-blue-700">
+                      {tableCopied ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
