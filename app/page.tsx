@@ -2,12 +2,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 export default function Home() {
-  const [currentTimestamp, setCurrentTimestamp] = useState(
-    Math.floor(Date.now() / 1000)
-  );
-  const [currentDateTime, setCurrentDateTime] = useState(
-    new Date().toLocaleString()
-  );
+  const [currentTimestamp, setCurrentTimestamp] = useState<number | undefined>()
+  const [currentDateTime, setCurrentDateTime] = useState('');
   const [isTimestampResultVisible, setTimestampResultVisible] = useState(false);
   const [isDateResultVisible, setDateResultVisible] = useState(false);
   const [timestamp, setTimestamp] = useState("");
@@ -27,7 +23,7 @@ export default function Home() {
   const [dYourTimezone, setDYourTimezone] = useState("");
   const [dRelative, setDRelative] = useState("");
   const [copied, setCopied] = useState(false);
-  const [tableCopied, setTableCopied] = useState(false);
+  const [tableCopied, setTableCopied] = useState<Record<string, boolean>>({});
 
   const languages = [
     { name: 'Swift', code: 'NSDate().timeIntervalSince1970' },
@@ -47,12 +43,12 @@ export default function Home() {
     { name: '.NET/C#', code: 'DateTimeOffset.UtcNow.ToUnixTimeSeconds();' },
     { name: 'Dart', code: '(new DateTime.now().millisecondsSinceEpoch / 1000).truncate()' }
   ];
-  
-    const copyToClipboard = (code) => {
-      navigator.clipboard.writeText(code);
-      setTableCopied(true);
-      setTimeout(() => setTableCopied(false), 1000); // 1秒后复制状态重置
-    };
+
+  const copyToClipboard = (code: string, lang: string) => {
+    navigator.clipboard.writeText(code);
+    setTableCopied({ ...tableCopied, [lang]: true });
+    setTimeout(() => setTableCopied({ ...tableCopied, [lang]: false }), 1000);
+  };
 
   const handleTimestampChange = useCallback(() => {
     const timestampValue = parseInt(timestamp);
@@ -242,6 +238,8 @@ export default function Home() {
   }
 
   useEffect(() => {
+    setCurrentTimestamp(Math.floor(Date.now() / 1000));
+    setCurrentDateTime(new Date().toLocaleString());
     if (timestamp) {
       setTimestampResultVisible(true);
       handleTimestampChange();
@@ -529,8 +527,8 @@ export default function Home() {
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <div className="flex justify-between">
                     <code>{lang.code}</code>
-                    <button onClick={() => copyToClipboard(lang.code)} className="text-blue-500 hover:text-blue-700">
-                      {tableCopied ? 'Copied' : 'Copy'}
+                    <button onClick={() => copyToClipboard(lang.code, lang.name)} className="text-blue-500 hover:text-blue-700">
+                      {tableCopied[lang.name] ? 'Copied' : 'Copy'}
                     </button>
                   </div>
                 </td>
