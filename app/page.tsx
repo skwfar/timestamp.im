@@ -121,11 +121,21 @@ export default function Home() {
       Number(minute),
       Number(second)
     );
-    var dateString = Math.floor(date.getTime() / 1000);
-    setConvertedDate(String(dateString));
-    setDGmt(date.toUTCString());
-    setDYourTimezone(date.toLocaleString(undefined, options));
-    setDRelative(calculateRelativeTime(date));
+    var convertedDate = String(Math.floor(date.getTime() / 1000));
+    var gmt = date.toUTCString();
+    var yourTimezone = date.toLocaleString(undefined, options);
+    var relative = calculateRelativeTime(date);
+    // If validation fails, set convertedDate to "Invalid date"
+    if (!isValidDateTime(Number(year), Number(month), Number(day), Number(hour), Number(minute), Number(second))) {
+      convertedDate = "Invalid date";
+      gmt = "Invalid date";
+      yourTimezone = "Invalid date";
+      relative = "Invalid date";
+    }
+    setConvertedDate(convertedDate);
+    setDGmt(gmt);
+    setDYourTimezone(yourTimezone);
+    setDRelative(relative);
   }, [year, month, day, hour, minute, second]);
 
   const setCurrentDateTimeToState = () => {
@@ -152,7 +162,7 @@ export default function Home() {
     navigator.clipboard.writeText(String(currentTimestamp));
     setCopied(true);
 
-    // Reset the "Copied!" status after 1 seconds
+    // Reset the "Copied!" status after 2 seconds
     setTimeout(() => {
       setCopied(false);
     }, 1000);
@@ -178,6 +188,33 @@ export default function Home() {
     }
   };
 
+  const isValidDateTime = (year: number, month: number, day: number, hour: number, minute: number, second: number) => {
+    // 检查月份、小时、分钟和秒钟是否在有效范围内
+    if (
+      month < 1 ||
+      month > 12 ||
+      hour < 0 ||
+      hour > 23 ||
+      minute < 0 ||
+      minute > 59 ||
+      second < 0 ||
+      second > 59
+    ) {
+      return false;
+    }
+
+    // 创建日期对象并检查日期是否有效
+    const date = new Date(year, month - 1, day, hour, minute, second);
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month - 1 &&
+      date.getDate() === day &&
+      date.getHours() === hour &&
+      date.getMinutes() === minute &&
+      date.getSeconds() === second
+    );
+  }
+
   useEffect(() => {
     if (timestamp) {
       setTimestampResultVisible(true);
@@ -185,7 +222,14 @@ export default function Home() {
     } else {
       setTimestampResultVisible(false);
     }
-    if (year && month && day && hour && minute && second) {
+    if (
+      year &&
+      month &&
+      day &&
+      hour != undefined &&
+      minute != undefined &&
+      second != undefined
+    ) {
       setDateResultVisible(true);
       handleDateChange();
     } else {
@@ -223,6 +267,7 @@ export default function Home() {
               value={timestamp}
               onChange={(e) => setTimestamp(e.target.value)}
               className="border p-2 w-full mr-2"
+              min="0"
             />
           </div>
           <div className="flex-1 flex justify-center items-center flex-col">
@@ -296,6 +341,8 @@ export default function Home() {
                   )
                 }
                 className="border p-2 w-full"
+                min="1970"
+                max="2038"
               />
             </div>
           </div>
@@ -318,6 +365,8 @@ export default function Home() {
                   )
                 }
                 className="border p-2 w-full"
+                min="1"
+                max="12"
               />
             </div>
           </div>
@@ -340,6 +389,8 @@ export default function Home() {
                   )
                 }
                 className="border p-2 w-full"
+                min="1"
+                max="31"
               />
             </div>
           </div>
@@ -362,6 +413,8 @@ export default function Home() {
                   )
                 }
                 className="border p-2 w-full"
+                min="0"
+                max="24"
               />
             </div>
           </div>
@@ -384,6 +437,8 @@ export default function Home() {
                   )
                 }
                 className="border p-2 w-full"
+                min="0"
+                max="59"
               />
             </div>
           </div>
@@ -406,6 +461,8 @@ export default function Home() {
                   )
                 }
                 className="border p-2 w-full"
+                min="0"
+                max="59"
               />
             </div>
           </div>
