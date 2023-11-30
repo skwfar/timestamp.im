@@ -1,113 +1,439 @@
-import Image from 'next/image'
+"use client";
+import React, { useState, useEffect, useCallback } from "react";
 
 export default function Home() {
+  const [currentTimestamp, setCurrentTimestamp] = useState(
+    Math.floor(Date.now() / 1000)
+  );
+  const [currentDateTime, setCurrentDateTime] = useState(
+    new Date().toLocaleString()
+  );
+  const [isTimestampResultVisible, setTimestampResultVisible] = useState(false);
+  const [isDateResultVisible, setDateResultVisible] = useState(false);
+  const [timestamp, setTimestamp] = useState("");
+  const [year, setYear] = useState<number | undefined>();
+  const [month, setMonth] = useState<number | undefined>();
+  const [day, setDay] = useState<number | undefined>();
+  const [hour, setHour] = useState<number | undefined>();
+  const [minute, setMinute] = useState<number | undefined>();
+  const [second, setSecond] = useState<number | undefined>();
+  const [convertedTimestamp, setConvertedTimestamp] = useState("");
+  const [convertedDate, setConvertedDate] = useState("");
+  const [format, setFormat] = useState("");
+  const [tGmt, setTGmt] = useState("");
+  const [tYourTimezone, setTYourTimezone] = useState("");
+  const [tRelative, setTRelative] = useState("");
+  const [dGmt, setDGmt] = useState("");
+  const [dYourTimezone, setDYourTimezone] = useState("");
+  const [dRelative, setDRelative] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  const handleTimestampChange = useCallback(() => {
+    const timestampValue = parseInt(timestamp);
+    const options = {
+      weekday: "short" as const,
+      year: "numeric" as const,
+      month: "short" as const,
+      day: "numeric" as const,
+      hour: "numeric" as const,
+      minute: "numeric" as const,
+      second: "numeric" as const,
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      timeZoneName: "short" as const,
+    };
+
+    if (isNaN(timestampValue)) {
+      setFormat("Unknown format");
+      setConvertedTimestamp("Invalid timestamp");
+      return;
+    }
+
+    let dateString = "";
+    let format = "";
+    let gmt = "";
+    let yourTimezone = "";
+    let relative = "";
+    let date: Date;
+
+    switch (timestamp.length) {
+      case 10:
+        date = new Date(timestampValue * 1000);
+        format = "Second";
+        dateString = date.toLocaleString();
+        gmt = date.toUTCString();
+        yourTimezone = date.toLocaleString(undefined, options);
+        relative = calculateRelativeTime(date);
+        break;
+      case 13:
+        date = new Date(timestampValue);
+        format = "Milliseconds (1/1,000 second)";
+        dateString = date.toLocaleString();
+        gmt = date.toUTCString();
+        yourTimezone = date.toLocaleString(undefined, options);
+        relative = calculateRelativeTime(date);
+        break;
+      case 16:
+        date = new Date(timestampValue / 1000);
+        format = "Microseconds (1/1,000,000 second)";
+        dateString = date.toLocaleString();
+        gmt = date.toUTCString();
+        yourTimezone = date.toLocaleString(undefined, options);
+        relative = calculateRelativeTime(date);
+        break;
+      case 19:
+        date = new Date(timestampValue / 1e6);
+        format = "Nanoseconds (1 billionth of a second)";
+        dateString = date.toLocaleString();
+        gmt = date.toUTCString();
+        yourTimezone = date.toLocaleString(undefined, options);
+        relative = calculateRelativeTime(date);
+        break;
+      default:
+        format = "Unknown format";
+        dateString = "Invalid timestamp";
+        break;
+    }
+
+    setFormat(format);
+    setConvertedTimestamp(dateString);
+    setTGmt(gmt);
+    setTYourTimezone(yourTimezone);
+    setTRelative(relative);
+  }, [timestamp]);
+
+  const handleDateChange = useCallback(() => {
+    const options = {
+      weekday: "short" as const,
+      year: "numeric" as const,
+      month: "short" as const,
+      day: "numeric" as const,
+      hour: "numeric" as const,
+      minute: "numeric" as const,
+      second: "numeric" as const,
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      timeZoneName: "short" as const,
+    };
+    const date = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second)
+    );
+    var dateString = Math.floor(date.getTime() / 1000);
+    setConvertedDate(String(dateString));
+    setDGmt(date.toUTCString());
+    setDYourTimezone(date.toLocaleString(undefined, options));
+    setDRelative(calculateRelativeTime(date));
+  }, [year, month, day, hour, minute, second]);
+
+  const setCurrentDateTimeToState = () => {
+    const currentDate = new Date();
+
+    setYear(currentDate.getFullYear());
+    setMonth(currentDate.getMonth() + 1); // 月份从 0 开始，所以要加 1
+    setDay(currentDate.getDate());
+    setHour(currentDate.getHours());
+    setMinute(currentDate.getMinutes());
+    setSecond(currentDate.getSeconds());
+  };
+
+  const setCurrentTimestampToState = () => {
+    setTimestamp(String(Math.floor(Date.now() / 1000)));
+  };
+
+  const handleUse = () => {
+    setCurrentDateTimeToState();
+    setCurrentTimestampToState();
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(String(currentTimestamp));
+    setCopied(true);
+
+    // Reset the "Copied!" status after 1 seconds
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
+
+  const calculateRelativeTime = (date: Date) => {
+    const currentDate = new Date();
+    const diffInMilliseconds = currentDate.getTime() - date.getTime();
+
+    const seconds = Math.floor(diffInMilliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return `${days} day${days > 1 ? "s" : ""} ago`;
+    } else if (hours > 0) {
+      return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+    } else if (minutes > 0) {
+      return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+    } else {
+      return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
+    }
+  };
+
+  useEffect(() => {
+    if (timestamp) {
+      setTimestampResultVisible(true);
+      handleTimestampChange();
+    } else {
+      setTimestampResultVisible(false);
+    }
+    if (year && month && day && hour && minute && second) {
+      setDateResultVisible(true);
+      handleDateChange();
+    } else {
+      setDateResultVisible(false);
+    }
+    const interval = setInterval(() => {
+      setCurrentTimestamp(Math.floor(Date.now() / 1000));
+      setCurrentDateTime(new Date().toLocaleString());
+      handleTimestampChange();
+      handleDateChange();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [
+    timestamp,
+    year,
+    month,
+    day,
+    hour,
+    minute,
+    second,
+    handleTimestampChange,
+    handleDateChange,
+  ]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+    <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
+      <div className="mb-10 mt-10">
+        <div className="flex mb-4">
+          <div className="flex-1">
+            <h2 className="text-lg font-bold mb-2">Enter a Timestamp</h2>
+            <input
+              type="text"
+              placeholder="Timestamp"
+              value={timestamp}
+              onChange={(e) => setTimestamp(e.target.value)}
+              className="border p-2 w-full mr-2"
             />
-          </a>
+          </div>
+          <div className="flex-1 flex justify-center items-center flex-col">
+            <div className="font-bold text-4xl"> {currentTimestamp}</div>
+            <div className="font-bold mb-2"> {currentDateTime}</div>
+            <div className="flex flex-row gap-4">
+              <button
+                onClick={handleUse}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Use
+              </button>
+              <button
+                onClick={handleCopy}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+                  copied ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={copied}
+              >
+                {copied ? "Copied!" : "Copy"}
+              </button>
+            </div>
+          </div>
+        </div>
+        {isTimestampResultVisible && (
+          <table className="ui celled definition table timestamp-results">
+            <tbody>
+              <tr>
+                <td className="w-48">Format</td>
+                <td className="format">{format}</td>
+              </tr>
+              <tr>
+                <td className="w-48">DateTime</td>
+                <td className="gmt">{convertedTimestamp}</td>
+              </tr>
+              <tr>
+                <td className="w-48">GMT</td>
+                <td className="gmt">{tGmt}</td>
+              </tr>
+              <tr>
+                <td className="w-48">Your Time Zone</td>
+                <td className="local">{tYourTimezone}</td>
+              </tr>
+              <tr>
+                <td className="w-48">Relative</td>
+                <td className="relative">{tRelative}</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      <div className="mb-10">
+        <h2 className="text-lg font-bold mb-2">Enter a Date & Time</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="col-span-1">
+            <div className="flex flex-col items-center">
+              <label htmlFor="year" className="text-sm mb-1">
+                Year
+              </label>
+              <input
+                type="number"
+                id="year"
+                placeholder="Year"
+                value={year === undefined ? "" : year}
+                onChange={(e) =>
+                  setYear(
+                    e.target.value === ""
+                      ? undefined
+                      : parseInt(e.target.value, 10)
+                  )
+                }
+                className="border p-2 w-full"
+              />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <div className="flex flex-col items-center">
+              <label htmlFor="month" className="text-sm mb-1">
+                Month
+              </label>
+              <input
+                type="number"
+                id="month"
+                placeholder="Month"
+                value={month === undefined ? "" : month}
+                onChange={(e) =>
+                  setMonth(
+                    e.target.value === ""
+                      ? undefined
+                      : parseInt(e.target.value, 10)
+                  )
+                }
+                className="border p-2 w-full"
+              />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <div className="flex flex-col items-center">
+              <label htmlFor="day" className="text-sm mb-1">
+                Day
+              </label>
+              <input
+                type="number"
+                id="day"
+                placeholder="Day"
+                value={day === undefined ? "" : day}
+                onChange={(e) =>
+                  setDay(
+                    e.target.value === ""
+                      ? undefined
+                      : parseInt(e.target.value, 10)
+                  )
+                }
+                className="border p-2 w-full"
+              />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <div className="flex flex-col items-center">
+              <label htmlFor="hour" className="text-sm mb-1">
+                Hour
+              </label>
+              <input
+                type="number"
+                id="hour"
+                placeholder="Hour"
+                value={hour === undefined ? "" : hour}
+                onChange={(e) =>
+                  setHour(
+                    e.target.value === ""
+                      ? undefined
+                      : parseInt(e.target.value, 10)
+                  )
+                }
+                className="border p-2 w-full"
+              />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <div className="flex flex-col items-center">
+              <label htmlFor="minute" className="text-sm mb-1">
+                Minute
+              </label>
+              <input
+                type="number"
+                id="minute"
+                placeholder="Minute"
+                value={minute === undefined ? "" : minute}
+                onChange={(e) =>
+                  setMinute(
+                    e.target.value === ""
+                      ? undefined
+                      : parseInt(e.target.value, 10)
+                  )
+                }
+                className="border p-2 w-full"
+              />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <div className="flex flex-col items-center">
+              <label htmlFor="second" className="text-sm mb-1">
+                Second
+              </label>
+              <input
+                type="number"
+                id="second"
+                placeholder="Second"
+                value={second === undefined ? "" : second}
+                onChange={(e) =>
+                  setSecond(
+                    e.target.value === ""
+                      ? undefined
+                      : parseInt(e.target.value, 10)
+                  )
+                }
+                className="border p-2 w-full"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+      {isDateResultVisible && (
+        <table className="ui celled definition table timestamp-results">
+          <tbody>
+            <tr>
+              <td className="w-48">DateTime</td>
+              <td className="timestamp">{convertedDate}</td>
+            </tr>
+            <tr>
+              <td className="w-48">GMT</td>
+              <td className="gmt">{dGmt}</td>
+            </tr>
+            <tr>
+              <td className="w-48">Your Time Zone</td>
+              <td className="local">{dYourTimezone}</td>
+            </tr>
+            <tr>
+              <td className="w-48">Relative</td>
+              <td className="relative">{dRelative}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
 }
