@@ -26,17 +26,17 @@ export default function Home() {
   const [tableCopied, setTableCopied] = useState<Record<string, boolean>>({});
 
   const languages = [
-    { name: 'Swift', code: 'NSDate().timeIntervalSince1970' },
     { name: 'Go', code: 'int64(time.Now().Unix())' },
     { name: 'Java', code: 'System.currentTimeMillis() / 1000' },
     { name: 'JavaScript', code: 'Math.round(new Date() / 1000)' },
-    { name: 'Objective-C', code: '[[NSDate date] timeIntervalSince1970]' },
+    { name: 'PHP', code: 'time()' },
     { name: 'MySQL', code: 'SELECT unix_timestamp(now())' },
     { name: 'SQLite', code: "SELECT strftime('%s', 'now')" },
     { name: 'Erlang', code: 'calendar:datetime_to_gregorian_seconds(calendar:universal_time())-719528*24*3600.' },
-    { name: 'PHP', code: 'time()' },
     { name: 'Python', code: 'time.time()' },
     { name: 'Ruby', code: 'Time.now.to_i' },
+    { name: 'Objective-C', code: '[[NSDate date] timeIntervalSince1970]' },
+    { name: 'Swift', code: 'NSDate().timeIntervalSince1970' },
     { name: 'Shell', code: 'date +%s' },
     { name: 'Groovy', code: '(new Date().time / 1000).longValue()' },
     { name: 'Lua', code: 'os.time()' },
@@ -281,7 +281,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
-      <div className="mb-10 mt-10">
+      <div className="mb-10 mt-20">
         <div className="flex mb-4">
           <div className="flex-1">
             <h2 className="text-lg font-bold mb-2">Enter a Timestamp</h2>
@@ -494,7 +494,7 @@ export default function Home() {
       </div>
 
       {isDateResultVisible && (
-        <table className="ui celled definition table timestamp-results">
+        <table className="ui celled definition table timestamp-results mb-10">
           <tbody>
             <tr>
               <td className="w-48">DateTime</td>
