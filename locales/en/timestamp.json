@@ -1,0 +1,20 @@
+{
+    "language": "Language",
+    "site-name": "Timestamp Tool",
+    "timestamp": "Timestamp",
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "hour": "Hour",
+    "minute": "Minute",
+    "second": "Second",
+    "use": "Use",
+    "copy": "Copy",
+    "copied": "Copied",
+    "enter-a-timestamp": "Enter a timestamp",
+    "enter-a-date-and-time": "Enter a date & time", 
+    "format": "Format",
+    "date-and-time": "Date & Time",
+    "your-timezone": "Your time zone",
+    "relative": "Relative"
+  }

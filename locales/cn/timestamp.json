@@ -1,0 +1,20 @@
+{
+    "language": "语言",
+    "site-name": "时间戳工具",
+    "timestamp": "时间戳",
+    "year": "年",
+    "month": "月",
+    "day": "日",
+    "hour": "时",
+    "minute": "分",
+    "second": "秒",
+    "use": "使用",
+    "copy": "复制",
+    "copied": "已复制",
+    "enter-a-timestamp": "请输入时间戳",
+    "enter-a-date-and-time": "请输入日期和时间",
+    "format": "格式",
+    "datetime": "日期时间",
+    "your-timezone": "你的时区",
+    "relative": "相对时间"
+  }
