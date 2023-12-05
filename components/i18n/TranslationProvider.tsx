@@ -4,6 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import { ReactNode } from 'react';
 import initTranslations from '@/app/i18n';
 import { Resource, createInstance } from 'i18next';
+import { i18n as I18N } from "i18next";
 
 export default function TranslationsProvider({
   children,
@@ -18,7 +19,7 @@ export default function TranslationsProvider({
 }) {
   const i18n = createInstance();
 
-  initTranslations(locale, namespaces, i18n, resources);
+  initTranslations(locale, namespaces, i18n as I18N, resources);
 
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  return <I18nextProvider i18n={i18n as I18N}>{children}</I18nextProvider>;
 }
