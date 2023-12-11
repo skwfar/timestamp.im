@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 import Code from "./code";
+import RandomTimestamp from "./random";
 
 export default function ToDateTime({ timestamp }: { timestamp: string }) {
   const { t } = useTranslation()
@@ -31,7 +32,7 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
           date = new Date(timestampValue / 1e6);
           break;
         default:
-          date = new Date();
+          date = new Date(timestampValue * 1000);
           break;
       }
       return date;
@@ -101,6 +102,9 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
         </div>
         <div className="overflow-x-auto">
             <Code/>
+        </div>
+        <div className="my-4">
+          <RandomTimestamp/>
       </div>
     </div>
   );

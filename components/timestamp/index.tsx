@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 import Code from "./code";
+import RandomTimestamp from "./random";
 
 export default function Index() {
   const { t } = useTranslation()
@@ -476,9 +477,12 @@ export default function Index() {
       )}
 
       <div className="overflow-x-auto">
-            <Code/>
+        <Code/>
       </div>
 
+      <div className="my-4">
+        <RandomTimestamp/>
+      </div>
 
     </div>
   );
