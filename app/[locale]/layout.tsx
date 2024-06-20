@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import i18nConfig from '@/i18nConfig';
 import { dir } from 'i18next';
+import GoogleAnalytics from "@/components/analytics/ga";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <main>
+          <GoogleAnalytics />
           <Header locale={locale}/>
           {children}
           <Footer />
