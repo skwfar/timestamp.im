@@ -10,9 +10,9 @@ import GoogleAnalytics from "@/components/analytics/ga";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Timestamp - Timestamp & Date Converter',
+  title: 'Timestamp.im - Best Online Timestamp Tools for Accurate Date and Time Conversion',
   description: 'Unix timestamp converter for developers. Date and time function syntax reference for various programming languages.',
-  keywords: 'timestamp, timestamp converter, date, date converter, datetime, datetime converter, unix timestamp, unix timestamp converter',
+  keywords: 'timestamp tools, online timestamp generator, convert timestamp to date, Unix timestamp converter, time and date conversion, digital timestamping, epoch time converter, date to timestamp, human-readable timestamp, current timestamp generator, time formatting tools, timestamp utilities, Unix epoch time, time conversion tools',
 }
 
 export function generateStaticParams() {
