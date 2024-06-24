@@ -27,7 +27,7 @@ export default function RootLayout({
   params: { locale: string };
 },) {
   return (
-    <html lang={locale} dir={dir(locale)}>
+    <html lang={locale} dir={dir(locale)} data-theme="light">
       <head>
         {/* <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" /> */}
       </head>

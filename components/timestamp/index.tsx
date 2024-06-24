@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 import Code from "./code";
 import RandomTimestamp from "./random";
+import Faq from "./faq";
 
 export default function Index() {
   const { t } = useTranslation()
@@ -480,7 +481,11 @@ export default function Index() {
         <Code/>
       </div>
 
-      <div className="my-4">
+      <div className="my-8">
+        <Faq/>
+      </div>
+
+      <div className="my-8">
         <RandomTimestamp/>
       </div>
 
