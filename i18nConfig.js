@@ -4,4 +4,4 @@ const i18nConfig = {
   prefixDefault: false
 };
 
-module.exports = i18nConfig;
+export default i18nConfig;
