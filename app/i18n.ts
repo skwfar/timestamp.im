@@ -27,16 +27,16 @@ export default async function initTranslations(
       i18nInstance.use(
         resourcesToBackend(async (language: string, namespace: string) => {
           try {
-            const module = await import(`@/locales/${language}/${namespace}.json`);
+            const translationModule = await import(`@/locales/${language}/${namespace}.json`); // 改为 translationModule
             // 更新缓存
             if (!resourceCache[cacheKey]) {
               resourceCache[cacheKey] = {};
             }
             resourceCache[cacheKey][language] = {
               ...resourceCache[cacheKey][language],
-              [namespace]: module.default
+              [namespace]: translationModule.default
             };
-            return module.default;
+            return translationModule.default; // 使用 translationModule
           } catch (error) {
             console.error(`Failed to load translation: ${language}/${namespace}`, error);
             return {};
@@ -65,4 +65,4 @@ export default async function initTranslations(
     console.error('Translation initialization failed:', error);
     throw error;
   }
-}
+} 
