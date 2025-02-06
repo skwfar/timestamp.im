@@ -1,9 +1,8 @@
 'use client';
 
-import { useTranslation } from 'react-i18next';
 import i18nConfig from '@/i18nConfig.js';
 
-const LANGUAGE_NAMES: Record<Locale, string> = {
+const LANGUAGE_NAMES: Record<any, string> = {
   en: 'English',
   cn: '中文',
   ja: '日本語',
