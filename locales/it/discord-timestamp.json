@@ -1,0 +1,9 @@
+{
+  "discord-title": "Generatore di Timestamp Discord",
+  "discord-datetime": "Seleziona data e ora",
+  "discord-unix": "Oppure inserisci un timestamp UNIX",
+  "discord-preview": "Anteprima",
+  "discord-tip": "Seleziona una data o inserisci un timestamp sopra.",
+  "copy": "Copia",
+  "copied": "Copiato!"
+} 

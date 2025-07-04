@@ -1,0 +1,9 @@
+{
+  "discord-title": "디스코드 타임스탬프 생성기",
+  "discord-datetime": "날짜와 시간을 선택하세요",
+  "discord-unix": "또는 UNIX 타임스탬프를 입력하세요",
+  "discord-preview": "미리보기",
+  "discord-tip": "위에서 날짜를 선택하거나 타임스탬프를 입력하세요.",
+  "copy": "복사",
+  "copied": "복사됨!"
+} 

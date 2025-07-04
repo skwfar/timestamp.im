@@ -24,7 +24,7 @@ const Header = async ({ locale }: { locale: string }) => {
   const { t } = await initTranslations(locale, i18nNamespaces);
   
   return (
-    <header className="fixed top-0 w-full">
+    <header className="top-0 w-full">
       <div className="bg-neutral text-neutral-content bg-base-100">
         <div className="navbar mx-auto flex justify-between lg:w-1/2 xl:w-1/2">
           <div className="navbar-start">
@@ -49,19 +49,15 @@ const Header = async ({ locale }: { locale: string }) => {
                   />
                 </svg>
               </div>
-              {/* <ul
+              <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow bg-neutral text-neutral-content"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] mt-3 w-52 p-2 shadow bg-neutral text-neutral-content lg:hidden"
               >
                 <li>
-                  <a>Tools list</a>
-                  <ul className="p-2">
-                    <li>
-                      <a href="/discord">Discord Timestamp Convertor</a>
-                    </li>
-                  </ul>
+                  <a href={`/${locale}/t/discord`}>Discord Timestamp Generator</a>
                 </li>
-              </ul> */}
+                {/* 以后可以在这里加更多工具 */}
+              </ul>
             </div>
             <a className="btn btn-ghost text-xl" href={`/${locale}`}>
               {t("site-name")}
@@ -71,7 +67,7 @@ const Header = async ({ locale }: { locale: string }) => {
           </div>
           <div className="navbar-center hidden lg:flex">
             <div className="dropdown dropdown-hover">
-              <div tabIndex={0} role="button" className="btn m-1 bg-neutral text-neutral-content hover:text-black">
+              <div tabIndex={0} role="button" className="btn btn-ghost text-base font-medium px-4 rounded hover:bg-neutral-focus transition-colors">
                 Tools
               </div>
               <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[9999] w-52 p-2 shadow bg-neutral text-neutral-content">

@@ -41,7 +41,7 @@ const DiscordTimestampGenerator: React.FC = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4 bg-base-100 rounded shadow mt-20">
+    <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
       <h2 className="text-2xl font-bold my-6 items-center gap-2">{t("discord-title", "Discord Timestamp Generator")}</h2>
       <div className="mb-4 flex flex-col gap-4">
         <label className="font-semibold flex items-center gap-2"><FaRegCalendarAlt />{t("discord-datetime", "Pick a date & time")}</label>
@@ -78,7 +78,7 @@ const DiscordTimestampGenerator: React.FC = () => {
               return (
                 <li key={f.code} className="flex items-center gap-2">
                   <code className="bg-neutral text-neutral-content px-2 py-1 rounded select-all">{code}</code>
-                  <span className="text-sm text-gray-400">{f.label}</span>
+                  <span className="text-sm">{f.label}</span>
                   <button
                     className="btn btn-xs btn-outline ml-2"
                     onClick={() => handleCopy(code)}

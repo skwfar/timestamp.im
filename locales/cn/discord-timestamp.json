@@ -1,0 +1,9 @@
+{
+  "discord-title": "Discord 时间戳生成器",
+  "discord-datetime": "选择日期和时间",
+  "discord-unix": "或输入 UNIX 时间戳",
+  "discord-preview": "预览",
+  "discord-tip": "请在上方选择日期或输入时间戳。",
+  "copy": "复制",
+  "copied": "已复制！"
+} 

@@ -1,0 +1,9 @@
+{
+  "discord-title": "Générateur d'horodatage Discord",
+  "discord-datetime": "Choisissez la date et l'heure",
+  "discord-unix": "Ou entrez un timestamp UNIX",
+  "discord-preview": "Aperçu",
+  "discord-tip": "Choisissez une date ou entrez un timestamp ci-dessus.",
+  "copy": "Copier",
+  "copied": "Copié !"
+} 

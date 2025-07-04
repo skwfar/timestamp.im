@@ -77,7 +77,7 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
   return (
     <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
         <div className="mb-10 mt-20">
-            <div className="flex mb-4">
+            <div className="flex flex-col md:flex-row mb-4 gap-4">
                 <div className="flex-1 flex justify-center items-center flex-col">
                     <div className="font-bold text-4xl">
                         {timestamp}

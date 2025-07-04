@@ -1,0 +1,9 @@
+{
+  "discord-title": "Discordタイムスタンプジェネレーター",
+  "discord-datetime": "日付と時刻を選択",
+  "discord-unix": "またはUNIXタイムスタンプを入力",
+  "discord-preview": "プレビュー",
+  "discord-tip": "上で日付を選択するか、タイムスタンプを入力してください。",
+  "copy": "コピー",
+  "copied": "コピーしました！"
+} 
