@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Code from "./code";
 import RandomTimestamp from "./random";
 import { getTimestampDetails } from '../../utilities/timestampDetails';
+import Faq from "./faq";
 
 export default function ToDateTime({ timestamp }: { timestamp: string }) {
   const { t } = useTranslation()
@@ -136,6 +137,9 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
           <li>{t('timestamp-prev-year')}: <a href={`/${locale}/t/${details.relatedTimestamps.prevYear}`}>{details.relatedTimestamps.prevYear}</a></li>
           <li>{t('timestamp-next-year')}: <a href={`/${locale}/t/${details.relatedTimestamps.nextYear}`}>{details.relatedTimestamps.nextYear}</a></li>
         </ul>
+      </div>
+      <div className="my-8">
+        <Faq/>
       </div>
       <div className="my-4">
           <RandomTimestamp/>

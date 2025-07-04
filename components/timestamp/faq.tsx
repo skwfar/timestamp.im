@@ -41,7 +41,7 @@ const Faq = () => {
     <div className="space-y-4">
       <div className="pt-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="collapse collapse-arrow border-b border-base-300 bg-base-100 rounded-box mt-2">
+          <div key={index} className="collapse collapse-arrow border-b border-base-300 rounded-box mt-2">
             <input 
               type="checkbox" 
               className="peer" 

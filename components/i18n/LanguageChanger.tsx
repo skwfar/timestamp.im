@@ -41,7 +41,7 @@ const handleChange = (lang: string) => {
       <div tabIndex={0} role="button" className="btn m-1 bg-neutral text-neutral-content hover:text-black">
         {LANGUAGE_NAMES[locale as keyof typeof LANGUAGE_NAMES]}
       </div>
-      <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow bg-neutral text-neutral-content">
+      <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[9999] w-52 p-2 shadow bg-neutral text-neutral-content">
         {i18nConfig.locales.map((lang) => (
           <li key={lang}>
             <button
