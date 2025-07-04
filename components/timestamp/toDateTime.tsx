@@ -3,17 +3,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 import Code from "./code";
 import RandomTimestamp from "./random";
+import { getTimestampDetails } from '../../utilities/timestampDetails';
 
 export default function ToDateTime({ timestamp }: { timestamp: string }) {
   const { t } = useTranslation()
   const [datetime, setDatetime] = useState('');
   const [currentTimestamp, setCurrentTimestamp] = useState<number | undefined>()
   const [currentDateTime, setCurrentDateTime] = useState('');
-  const [relative, setRelative] = useState("");
 
-  const handleTimestampChange = useCallback(() => {
-    setRelative(calculateRelativeTime(new Date(), convertTimestampToDate(timestamp)));
-  }, [timestamp]);
 
   const convertTimestampToDate = (timestamp: string) => {
     const timestampValue = parseInt(timestamp);
@@ -61,15 +58,17 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
     setDatetime(convertTimestampToDate(timestamp).toLocaleString());
     setCurrentTimestamp(Math.floor(Date.now() / 1000));
     setCurrentDateTime(new Date().toLocaleString());
-    handleTimestampChange();
+
     const interval = setInterval(() => {
       setCurrentTimestamp(Math.floor(Date.now() / 1000));
       setCurrentDateTime(new Date().toLocaleString());
-      handleTimestampChange();
+
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timestamp, handleTimestampChange]);
+  }, [timestamp]);
+
+  const details = getTimestampDetails(Number(timestamp));
 
   return (
     <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
@@ -95,15 +94,47 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
             <div className="flex mb-4">
                 <div className="flex-1 flex justify-center items-center flex-col">
                     <div className="font-bold text-4xl">
-                        {relative}
+                        {details.formats.jp}
                     </div>
                 </div>
             </div>
         </div>
-        <div className="overflow-x-auto">
-            <Code/>
-        </div>
-        <div className="my-4">
+
+
+      <div className="my-8">
+      <h3 className="font-bold mt-4">多种日期格式</h3>
+        <ul className="grid grid-cols-2 gap-2 text-base">
+          <li>ISO: {details.formats.iso}</li>
+          <li>RFC3339: {details.formats.rfc3339}</li>
+          <li>美式: {details.formats.us}</li>
+          <li>欧式: {details.formats.eu}</li>
+          <li>中文: {details.formats.cn}</li>
+          <li>日式: {details.formats.jp}</li>
+        </ul>
+        <h3 className="font-bold mt-4">常用时区</h3>
+        <ul className="grid grid-cols-2 gap-2 text-base">
+          {Object.entries(details.timezones).map(([tz, val]) => (
+            <li key={tz}>{tz}: {val}</li>
+          ))}
+        </ul>
+        <h3 className="font-bold mt-4">详细信息</h3>
+        <ul className="grid grid-cols-2 gap-2 text-base">
+          <li>星期几: {details.weekday}</li>
+          <li>第几季度: {details.quarter}</li>
+          <li>第几周: {details.week}</li>
+          <li>第几天: {details.dayOfYear}</li>
+          <li>是否闰年: {details.isLeapYear ? '是' : '否'}</li>
+          <li>距今: {details.daysFromNow} 天, {details.hoursFromNow} 小时</li>
+        </ul>
+        <h3 className="font-bold mt-4">相关时间戳</h3>
+        <ul className="grid grid-cols-2 gap-2 text-base">
+          <li>前一天: <a href={`/t/${details.relatedTimestamps.prevDay}`}>{details.relatedTimestamps.prevDay}</a></li>
+          <li>后一天: <a href={`/t/${details.relatedTimestamps.nextDay}`}>{details.relatedTimestamps.nextDay}</a></li>
+          <li>去年同日: <a href={`/t/${details.relatedTimestamps.prevYear}`}>{details.relatedTimestamps.prevYear}</a></li>
+          <li>明年同日: <a href={`/t/${details.relatedTimestamps.nextYear}`}>{details.relatedTimestamps.nextYear}</a></li>
+        </ul>
+      </div>
+      <div className="my-4">
           <RandomTimestamp/>
       </div>
     </div>
