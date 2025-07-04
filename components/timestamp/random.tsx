@@ -12,7 +12,13 @@ const generateUniqueTimestamps = () => {
     return Array.from(uniqueTimestamps);
   };
   
-  
+
+const formatDate = (timestamp: number) => {
+    const date = new Date(timestamp * 1000);
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+};
+
 const RandomTimestamp: React.FC = () => {
     const [timestamps, setTimestamps] = useState<number[]>([]);
   
@@ -28,7 +34,7 @@ const RandomTimestamp: React.FC = () => {
                 href={`/t/${timestamp}`}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center"
             >
-                {timestamp}
+                {formatDate(timestamp)}
             </a>
         ))}
       </div>
