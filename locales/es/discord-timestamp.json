@@ -5,5 +5,16 @@
   "discord-preview": "Vista previa",
   "discord-tip": "Elige una fecha o ingresa un timestamp arriba.",
   "copy": "Copiar",
-  "copied": "¡Copiado!"
+  "copied": "¡Copiado!",
+  "faq-title": "Preguntas frecuentes",
+  "faq-q1": "¿Qué es una marca de tiempo de Discord?",
+  "faq-a1": "Una marca de tiempo de Discord es un código especial (como <t:TIMESTAMP:f>) que muestra una fecha/hora formateada en el chat, ajustada automáticamente a la zona horaria de cada usuario.",
+  "faq-q2": "¿Cómo uso estos códigos en Discord?",
+  "faq-a2": "Copia cualquier código de arriba y pégalo directamente en tu mensaje de Discord. Discord lo mostrará como una fecha/hora formateada para todos.",
+  "faq-q3": "¿Qué formatos son compatibles?",
+  "faq-a3": "Formatos compatibles: fecha corta/larga, hora corta/larga, fecha y hora corta/larga y tiempo relativo. Consulta la lista de vista previa anterior para más detalles.",
+  "faq-q4": "¿Puedo usar una marca de tiempo UNIX?",
+  "faq-a4": "¡Sí! Ingresa una marca de tiempo UNIX o elige una fecha/hora. La herramienta generará todos los códigos de marca de tiempo de Discord por ti.",
+  "faq-q5": "¿Por qué la vista previa muestra números?",
+  "faq-a5": "Discord solo muestra estos códigos dentro del chat de Discord. Aquí ves el código sin procesar para copiar y pegar."
 } 

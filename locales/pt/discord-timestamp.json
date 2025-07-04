@@ -5,5 +5,16 @@
   "discord-preview": "Pré-visualização",
   "discord-tip": "Escolha uma data ou insira um timestamp acima.",
   "copy": "Copiar",
-  "copied": "Copiado!"
+  "copied": "Copiado!",
+  "faq-title": "Perguntas frequentes",
+  "faq-q1": "O que é um timestamp do Discord?",
+  "faq-a1": "Um timestamp do Discord é um código especial (como <t:TIMESTAMP:f>) que exibe uma data/hora formatada no chat, ajustada automaticamente ao fuso horário de cada usuário.",
+  "faq-q2": "Como uso esses códigos no Discord?",
+  "faq-a2": "Copie qualquer código acima e cole diretamente na sua mensagem do Discord. O Discord irá exibi-lo como uma data/hora formatada para todos.",
+  "faq-q3": "Quais formatos são suportados?",
+  "faq-a3": "Formatos suportados: data curta/longa, hora curta/longa, data e hora curta/longa e tempo relativo. Veja a lista de visualização acima para detalhes.",
+  "faq-q4": "Posso usar um timestamp UNIX?",
+  "faq-a4": "Sim! Insira um timestamp UNIX ou escolha uma data/hora. A ferramenta irá gerar todos os códigos de timestamp do Discord para você.",
+  "faq-q5": "Por que a visualização mostra números?",
+  "faq-a5": "O Discord só renderiza esses códigos dentro do chat do Discord. Aqui você vê o código bruto para copiar e colar."
 } 

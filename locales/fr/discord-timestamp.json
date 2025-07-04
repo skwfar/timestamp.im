@@ -5,5 +5,16 @@
   "discord-preview": "Aperçu",
   "discord-tip": "Choisissez une date ou entrez un timestamp ci-dessus.",
   "copy": "Copier",
-  "copied": "Copié !"
+  "copied": "Copié !",
+  "faq-title": "FAQ",
+  "faq-q1": "Qu'est-ce qu'un horodatage Discord ?",
+  "faq-a1": "Un horodatage Discord est un code spécial (comme <t:TIMESTAMP:f>) qui affiche une date/heure formatée dans le chat, ajustée automatiquement au fuseau horaire de chaque utilisateur.",
+  "faq-q2": "Comment utiliser ces codes dans Discord ?",
+  "faq-a2": "Copiez n'importe quel code ci-dessus et collez-le directement dans votre message Discord. Discord l'affichera comme une date/heure formatée pour tout le monde.",
+  "faq-q3": "Quels formats sont pris en charge ?",
+  "faq-a3": "Formats pris en charge : date courte/longue, heure courte/longue, date et heure courte/longue et temps relatif. Voir la liste d'aperçu ci-dessus pour plus de détails.",
+  "faq-q4": "Puis-je utiliser un timestamp UNIX ?",
+  "faq-a4": "Oui ! Entrez un timestamp UNIX ou choisissez une date/heure. L'outil générera tous les codes d'horodatage Discord pour vous.",
+  "faq-q5": "Pourquoi l'aperçu affiche-t-il des chiffres ?",
+  "faq-a5": "Discord n'affiche ces codes que dans le chat Discord. Ici, vous voyez le code brut à copier et coller."
 } 
