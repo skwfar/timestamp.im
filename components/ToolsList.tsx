@@ -1,6 +1,7 @@
 import React from 'react';
 
 const tools = [
+  { name: 'Discord Timestamp Generator', description: 'Generate Discord chat timestamps easily.', link: '/t/discord' },
   { name: 'Timestamp Generator', description: 'Generate timestamps easily.', link: '/timestamp-generator' },
   { name: 'Timestamp Converter', description: 'Convert between different timestamp formats.', link: '/timestamp-converter' },
   { name: 'Timezone Converter', description: 'Convert time between different time zones.', link: '/timezone-converter' },

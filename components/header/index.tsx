@@ -69,20 +69,19 @@ const Header = async ({ locale }: { locale: string }) => {
             {/* locale-aware home link */}
             {/* <a className="btn btn-ghost text-xl" href={`/${locale}`}>{t("site-name")}</a> */}
           </div>
-          {/* <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <details>
-                  <summary>Tools list</summary>
-                  <ul className="p-2 bg-neutral text-neutral-content min-w-max">
-                    <li>
-                    <a href="/discord">Discord Timestamp Convertor</a>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-            </ul>
-          </div> */}
+          <div className="navbar-center hidden lg:flex">
+            <div className="dropdown dropdown-hover">
+              <div tabIndex={0} role="button" className="btn m-1 bg-neutral text-neutral-content hover:text-black">
+                Tools
+              </div>
+              <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[9999] w-52 p-2 shadow bg-neutral text-neutral-content">
+                <li>
+                  <a href={`/${locale}/t/discord`}>Discord Timestamp Generator</a>
+                </li>
+                {/* 以后可以在这里加更多工具 */}
+              </ul>
+            </div>
+          </div>
           <div className="navbar-end">
             <LanguageChanger locale={locale} />
           </div>
