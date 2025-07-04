@@ -102,36 +102,36 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
 
 
       <div className="my-8">
-      <h3 className="font-bold mt-4">多种日期格式</h3>
+      <h3 className="font-bold mt-4">{t('timestamp-multiple-formats')}</h3>
         <ul className="grid grid-cols-2 gap-2 text-base">
           <li>ISO: {details.formats.iso}</li>
           <li>RFC3339: {details.formats.rfc3339}</li>
-          <li>美式: {details.formats.us}</li>
-          <li>欧式: {details.formats.eu}</li>
-          <li>中文: {details.formats.cn}</li>
-          <li>日式: {details.formats.jp}</li>
+          <li>{t('timestamp-us')}: {details.formats.us}</li>
+          <li>{t('timestamp-eu')}: {details.formats.eu}</li>
+          <li>{t('timestamp-cn')}: {details.formats.cn}</li>
+          <li>{t('timestamp-jp')}: {details.formats.jp}</li>
         </ul>
-        <h3 className="font-bold mt-4">常用时区</h3>
+        <h3 className="font-bold mt-4">{t('timestamp-common-timezones')}</h3>
         <ul className="grid grid-cols-2 gap-2 text-base">
           {Object.entries(details.timezones).map(([tz, val]) => (
             <li key={tz}>{tz}: {val}</li>
           ))}
         </ul>
-        <h3 className="font-bold mt-4">详细信息</h3>
+        <h3 className="font-bold mt-4">{t('timestamp-details')}</h3>
         <ul className="grid grid-cols-2 gap-2 text-base">
-          <li>星期几: {details.weekday}</li>
-          <li>第几季度: {details.quarter}</li>
-          <li>第几周: {details.week}</li>
-          <li>第几天: {details.dayOfYear}</li>
-          <li>是否闰年: {details.isLeapYear ? '是' : '否'}</li>
-          <li>距今: {details.daysFromNow} 天, {details.hoursFromNow} 小时</li>
+          <li>{t('timestamp-weekday')}: {details.weekday}</li>
+          <li>{t('timestamp-quarter')}: {details.quarter}</li>
+          <li>{t('timestamp-week')}: {details.week}</li>
+          <li>{t('timestamp-day-of-year')}: {details.dayOfYear}</li>
+          <li>{t('timestamp-leap-year')}: {details.isLeapYear ? t('timestamp-yes') : t('timestamp-no')}</li>
+          <li>{t('timestamp-from-now')}: {details.daysFromNow} {t('timestamp-days')}, {details.hoursFromNow} {t('timestamp-hours')}</li>
         </ul>
-        <h3 className="font-bold mt-4">相关时间戳</h3>
+        <h3 className="font-bold mt-4">{t('timestamp-related-timestamps')}</h3>
         <ul className="grid grid-cols-2 gap-2 text-base">
-          <li>前一天: <a href={`/t/${details.relatedTimestamps.prevDay}`}>{details.relatedTimestamps.prevDay}</a></li>
-          <li>后一天: <a href={`/t/${details.relatedTimestamps.nextDay}`}>{details.relatedTimestamps.nextDay}</a></li>
-          <li>去年同日: <a href={`/t/${details.relatedTimestamps.prevYear}`}>{details.relatedTimestamps.prevYear}</a></li>
-          <li>明年同日: <a href={`/t/${details.relatedTimestamps.nextYear}`}>{details.relatedTimestamps.nextYear}</a></li>
+          <li>{t('timestamp-prev-day')}: <a href={`/t/${details.relatedTimestamps.prevDay}`}>{details.relatedTimestamps.prevDay}</a></li>
+          <li>{t('timestamp-next-day')}: <a href={`/t/${details.relatedTimestamps.nextDay}`}>{details.relatedTimestamps.nextDay}</a></li>
+          <li>{t('timestamp-prev-year')}: <a href={`/t/${details.relatedTimestamps.prevYear}`}>{details.relatedTimestamps.prevYear}</a></li>
+          <li>{t('timestamp-next-year')}: <a href={`/t/${details.relatedTimestamps.nextYear}`}>{details.relatedTimestamps.nextYear}</a></li>
         </ul>
       </div>
       <div className="my-4">
