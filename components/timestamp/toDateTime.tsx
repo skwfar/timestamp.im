@@ -1,12 +1,15 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'next/navigation';
 import Code from "./code";
 import RandomTimestamp from "./random";
 import { getTimestampDetails } from '../../utilities/timestampDetails';
 
 export default function ToDateTime({ timestamp }: { timestamp: string }) {
   const { t } = useTranslation()
+  const params = useParams();
+  const locale = typeof params?.locale === 'string' ? params.locale : Array.isArray(params?.locale) ? params?.locale[0] : '';
   const [datetime, setDatetime] = useState('');
   const [currentTimestamp, setCurrentTimestamp] = useState<number | undefined>()
   const [currentDateTime, setCurrentDateTime] = useState('');
@@ -128,10 +131,10 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
         </ul>
         <h3 className="font-bold mt-4">{t('timestamp-related-timestamps')}</h3>
         <ul className="grid grid-cols-2 gap-2 text-base">
-          <li>{t('timestamp-prev-day')}: <a href={`/t/${details.relatedTimestamps.prevDay}`}>{details.relatedTimestamps.prevDay}</a></li>
-          <li>{t('timestamp-next-day')}: <a href={`/t/${details.relatedTimestamps.nextDay}`}>{details.relatedTimestamps.nextDay}</a></li>
-          <li>{t('timestamp-prev-year')}: <a href={`/t/${details.relatedTimestamps.prevYear}`}>{details.relatedTimestamps.prevYear}</a></li>
-          <li>{t('timestamp-next-year')}: <a href={`/t/${details.relatedTimestamps.nextYear}`}>{details.relatedTimestamps.nextYear}</a></li>
+          <li>{t('timestamp-prev-day')}: <a href={`/${locale}/t/${details.relatedTimestamps.prevDay}`}>{details.relatedTimestamps.prevDay}</a></li>
+          <li>{t('timestamp-next-day')}: <a href={`/${locale}/t/${details.relatedTimestamps.nextDay}`}>{details.relatedTimestamps.nextDay}</a></li>
+          <li>{t('timestamp-prev-year')}: <a href={`/${locale}/t/${details.relatedTimestamps.prevYear}`}>{details.relatedTimestamps.prevYear}</a></li>
+          <li>{t('timestamp-next-year')}: <a href={`/${locale}/t/${details.relatedTimestamps.nextYear}`}>{details.relatedTimestamps.nextYear}</a></li>
         </ul>
       </div>
       <div className="my-4">

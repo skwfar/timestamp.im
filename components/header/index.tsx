@@ -63,9 +63,11 @@ const Header = async ({ locale }: { locale: string }) => {
                 </li>
               </ul> */}
             </div>
-            <a className="btn btn-ghost text-xl" href="/">
+            <a className="btn btn-ghost text-xl" href={`/${locale}`}>
               {t("site-name")}
             </a>
+            {/* locale-aware home link */}
+            {/* <a className="btn btn-ghost text-xl" href={`/${locale}`}>{t("site-name")}</a> */}
           </div>
           {/* <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">

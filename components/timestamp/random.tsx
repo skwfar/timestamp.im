@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 
 const generateUniqueTimestamps = () => {
     const uniqueTimestamps = new Set<number>();
@@ -21,6 +22,8 @@ const formatDate = (timestamp: number) => {
 
 const RandomTimestamp: React.FC = () => {
     const [timestamps, setTimestamps] = useState<number[]>([]);
+    const params = useParams();
+    const locale = typeof params?.locale === 'string' ? params.locale : Array.isArray(params?.locale) ? params?.locale[0] : '';
   
     useEffect(() => {
       setTimestamps(generateUniqueTimestamps());
@@ -31,7 +34,7 @@ const RandomTimestamp: React.FC = () => {
         {timestamps.map((timestamp, index) => (
             <a
                 key={index}
-                href={`/t/${timestamp}`}
+                href={`/${locale}/t/${timestamp}`}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center"
             >
                 {formatDate(timestamp)}
