@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaRegClock, FaRegCalendarAlt } from "react-icons/fa";
+import { useCopy } from '../../hooks/useCopy';
+import ToolTemplate from '../ui/ToolTemplate';
+import InputField from '../ui/InputField';
+import Button from '../ui/Button';
 
 const discordFormats = [
   { code: "<t:TIMESTAMP:d>", label: "Short Date (01/01/1970)" },
@@ -30,45 +34,43 @@ const DiscordTimestampGenerator: React.FC = () => {
   const { t } = useTranslation();
   const [date, setDate] = useState(getNowLocal());
   const [unix, setUnix] = useState("");
-  const [copied, setCopied] = useState<string | null>(null);
+  const { copied, copyText } = useCopy(1200);
 
   const effectiveUnix = unix || (date ? String(toUnixTimestamp(date)) : "");
 
   const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(text);
-    setTimeout(() => setCopied(null), 1200);
+    copyText(text);
   };
 
   return (
-    <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
-      <h2 className="text-2xl font-bold my-6 items-center gap-2">{t("discord-title", "Discord Timestamp Generator")}</h2>
+    <ToolTemplate 
+      title={t("discord-title", "Discord Timestamp Generator")}
+      description={t("discord-description", "Generate Discord timestamp codes that display correctly in all timezones")}
+    >
       <div className="mb-4 flex flex-col gap-4">
-        <label className="font-semibold flex items-center gap-2"><FaRegCalendarAlt />{t("discord-datetime", "Pick a date & time")}</label>
-        <div className="relative">
-          <input
-            type="datetime-local"
-            className="input input-bordered w-full pl-10"
-            value={date}
-            onChange={e => {
-              setDate(e.target.value);
-              setUnix("");
-            }}
-          />
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"><FaRegCalendarAlt /></span>
-        </div>
-        <label className="font-semibold flex items-center gap-2"><FaRegClock />{t("discord-unix", "Or enter UNIX timestamp")}</label>
-        <div className="relative">
-          <input
-            type="number"
-            className="input input-bordered w-full pl-10"
-            placeholder="e.g. 1712345678"
-            value={unix}
-            onChange={e => setUnix(e.target.value)}
-          />
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"><FaRegClock /></span>
-        </div>
+        <InputField
+          label={t("discord-datetime", "Pick a date & time")}
+          type="datetime-local"
+          value={date}
+          onChange={(value) => {
+            setDate(value);
+            setUnix("");
+          }}
+          className="input input-bordered w-full"
+          icon={<FaRegCalendarAlt />}
+        />
+        
+        <InputField
+          label={t("discord-unix", "Or enter UNIX timestamp")}
+          type="number"
+          value={unix}
+          onChange={(value) => setUnix(value)}
+          placeholder="e.g. 1712345678"
+          className="input input-bordered w-full"
+          icon={<FaRegClock />}
+        />
       </div>
+
       <div className="mb-4">
         <h3 className="font-semibold mb-2">{t("discord-preview", "Preview")}</h3>
         {effectiveUnix ? (
@@ -79,12 +81,13 @@ const DiscordTimestampGenerator: React.FC = () => {
                 <li key={f.code} className="flex items-center gap-2">
                   <code className="bg-neutral text-neutral-content px-2 py-1 rounded select-all">{code}</code>
                   <span className="text-sm">{f.label}</span>
-                  <button
-                    className="btn btn-xs btn-outline ml-2"
+                  <Button 
                     onClick={() => handleCopy(code)}
+                    variant="outline"
+                    className="btn-xs ml-2"
                   >
-                    {copied === code ? t("copied", "Copied!") : t("copy", "Copy")}
-                  </button>
+                    {copied ? t("copied", "Copied!") : t("copy", "Copy")}
+                  </Button>
                 </li>
               );
             })}
@@ -93,12 +96,13 @@ const DiscordTimestampGenerator: React.FC = () => {
           <div className="text-gray-400">{t("discord-tip", "Pick a date or enter a timestamp above.")}</div>
         )}
       </div>
+
       <div className="mt-8">
         <h3 className="text-xl font-bold mb-4">FAQ</h3>
         <div className="space-y-4">
           <div>
             <div className="font-semibold">What is a Discord timestamp?</div>
-            <div className="text-gray-500 text-sm">A Discord timestamp is a special code (like <code>&lt;t:TIMESTAMP:f&gt;</code>) that displays a formatted date/time in chat, auto-adjusted to each user's timezone.</div>
+            <div className="text-gray-500 text-sm">A Discord timestamp is a special code (like <code>&lt;t:TIMESTAMP:f&gt;</code>) that displays a formatted date/time in chat, auto-adjusted to each user&apos;s timezone.</div>
           </div>
           <div>
             <div className="font-semibold">How do I use these codes in Discord?</div>
@@ -118,8 +122,8 @@ const DiscordTimestampGenerator: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </ToolTemplate>
   );
 };
 
-export default DiscordTimestampGenerator; 
+export default DiscordTimestampGenerator;
