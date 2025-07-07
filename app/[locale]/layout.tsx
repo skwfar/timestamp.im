@@ -114,6 +114,7 @@ export default function RootLayout({
     <html lang={locale} dir={dir(locale)} data-theme="light">
       <head>
         {/* <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" /> */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7687969538448394" crossOrigin="anonymous"></script>
       </head>
       <body className={inter.className}>
         <StructuredData
