@@ -44,12 +44,12 @@ const DiscordTimestampGenerator: React.FC = () => {
 
   return (
     <ToolTemplate 
-      title={t("discord-title", "Discord Timestamp Generator")}
-      description={t("discord-description", "Generate Discord timestamp codes that display correctly in all timezones")}
+      title={t("discord-title")}
+      description={t("discord-description")}
     >
       <div className="mb-4 flex flex-col gap-4">
         <InputField
-          label={t("discord-datetime", "Pick a date & time")}
+          label={t("discord-datetime")}
           type="datetime-local"
           value={date}
           onChange={(value) => {
@@ -61,7 +61,7 @@ const DiscordTimestampGenerator: React.FC = () => {
         />
         
         <InputField
-          label={t("discord-unix", "Or enter UNIX timestamp")}
+          label={t("discord-unix")}
           type="number"
           value={unix}
           onChange={(value) => setUnix(value)}
@@ -72,7 +72,7 @@ const DiscordTimestampGenerator: React.FC = () => {
       </div>
 
       <div className="mb-4">
-        <h3 className="font-semibold mb-2">{t("discord-preview", "Preview")}</h3>
+        <h3 className="font-semibold mb-2">{t("discord-preview")}</h3>
         {effectiveUnix ? (
           <ul className="space-y-2">
             {discordFormats.map(f => {
@@ -86,14 +86,14 @@ const DiscordTimestampGenerator: React.FC = () => {
                     variant="outline"
                     className="btn-xs ml-2"
                   >
-                    {copied ? t("copied", "Copied!") : t("copy", "Copy")}
+                    {copied ? t("copied") : t("copy")}
                   </Button>
                 </li>
               );
             })}
           </ul>
         ) : (
-          <div className="text-gray-400">{t("discord-tip", "Pick a date or enter a timestamp above.")}</div>
+          <div className="text-gray-400">{t("discord-tip")}</div>
         )}
       </div>
 

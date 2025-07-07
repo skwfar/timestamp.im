@@ -1,0 +1,41 @@
+import initTranslations from '../../i18n';
+import TranslationsProvider from '@/components/i18n/TranslationProvider';
+import ToolTemplate from '@/components/ui/ToolTemplate';
+import LocalizedContent from '@/components/legal/LocalizedContent';
+import { Suspense } from 'react';
+import Loading from '../loading';
+import ErrorBoundary from '../../../components/ErrorBoundary';
+
+const i18nNamespaces = ['timestamp'];
+
+async function PrivacyPolicy({ params }: { params: { locale: string } }) {
+  const { t, resources } = await initTranslations(params.locale, i18nNamespaces);
+
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<Loading />}>
+        <TranslationsProvider
+          namespaces={i18nNamespaces}
+          locale={params.locale}
+          resources={resources}>
+          <ToolTemplate title="" className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
+            <LocalizedContent locale={params.locale} type="privacy" />
+          </ToolTemplate>
+        </TranslationsProvider>
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+
+export async function generateMetadata({ params }: { params: { locale: string } }) {
+  return {
+    title: 'Privacy Policy | Timestamp.im',
+    description: 'Privacy policy for Timestamp.im - Learn how we collect, use, and protect your information when using our timestamp conversion tools.',
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+export default PrivacyPolicy;

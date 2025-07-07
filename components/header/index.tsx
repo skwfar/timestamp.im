@@ -56,6 +56,12 @@ const Header = async ({ locale }: { locale: string }) => {
                 <li>
                   <a href={`/${locale}/t/discord`}>Discord Timestamp Generator</a>
                 </li>
+                <li>
+                  <a href={`/${locale}/t/timezone`}>Timezone Converter</a>
+                </li>
+                <li>
+                  <a href={`/${locale}/t/iso8601`}>ISO 8601 Converter</a>
+                </li>
                 {/* 以后可以在这里加更多工具 */}
               </ul>
             </div>
@@ -73,6 +79,12 @@ const Header = async ({ locale }: { locale: string }) => {
               <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[9999] w-52 p-2 shadow bg-neutral text-neutral-content">
                 <li>
                   <a href={`/${locale}/t/discord`}>Discord Timestamp Generator</a>
+                </li>
+                <li>
+                  <a href={`/${locale}/t/timezone`}>Timezone Converter</a>
+                </li>
+                <li>
+                  <a href={`/${locale}/t/iso8601`}>ISO 8601 Converter</a>
                 </li>
                 {/* 以后可以在这里加更多工具 */}
               </ul>

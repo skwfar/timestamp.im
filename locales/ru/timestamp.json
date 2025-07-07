@@ -27,27 +27,51 @@
   "yes-timestamp-tools-often-include-functionalities-to-compare-two-or-more-timestamps-this-can-help-determine-the-duration-between-events-check-for-discrepancies-or-verify-time-related-data-accurate-timestamp-comparisons-are-essential-for-applications-like-event-scheduling-logging-and-data-synchronization": "Да, инструменты временных меток часто включают функции для сравнения двух или более временных меток. Это может помочь определить продолжительность между событиями, проверить расхождения или проверить данные, связанные со временем. Точные сравнения временных меток необходимы для таких приложений, как планирование событий, ведение журналов и синхронизация данных.",
   "is-it-possible-to-compare-timestamps-using-these-tools": "Возможно ли сравнивать временные метки с помощью этих инструментов?",
   "are-timestamp-tools-free-to-use": "Бесплатны ли инструменты временных меток?",
-  "many-basic-timestamp-tools-are-available-for-free-and-accessible-online-however-some-advanced-tools-with-additional-features-may-require-a-subscription-or-one-time-purchase-its-essential-to-evaluate-the-tools-capabilities-and-choose-one-that-best-meets-your-needs-and-budget": "Многие базовые инструменты временных меток доступны бесплатно и доступны онлайн. Однако некоторые расширенные инструменты с дополнительными функциями могут требовать подписки или единовременной покупки. Важно оценить возможности инструментов и выбрать тот, который лучше всего соответствует вашим потребностям и бюджету."
-  ,"timestamp-multiple-formats": "Несколько форматов даты"
-  ,"timestamp-us": "Американский стиль"
-  ,"timestamp-eu": "Европейский стиль"
-  ,"timestamp-cn": "Китайский стиль"
-  ,"timestamp-jp": "Японский стиль"
-  ,"timestamp-common-timezones": "Популярные часовые пояса"
-  ,"timestamp-details": "Детали"
-  ,"timestamp-weekday": "День недели"
-  ,"timestamp-quarter": "Квартал"
-  ,"timestamp-week": "Номер недели"
-  ,"timestamp-day-of-year": "День года"
-  ,"timestamp-leap-year": "Високосный год"
-  ,"timestamp-yes": "Да"
-  ,"timestamp-no": "Нет"
-  ,"timestamp-from-now": "Сейчас"
-  ,"timestamp-days": "дней"
-  ,"timestamp-hours": "часов"
-  ,"timestamp-related-timestamps": "Связанные метки времени"
-  ,"timestamp-prev-day": "Предыдущий день"
-  ,"timestamp-next-day": "Следующий день"
-  ,"timestamp-prev-year": "Та же дата в прошлом году"
-  ,"timestamp-next-year": "Та же дата в следующем году"
+  "many-basic-timestamp-tools-are-available-for-free-and-accessible-online-however-some-advanced-tools-with-additional-features-may-require-a-subscription-or-one-time-purchase-its-essential-to-evaluate-the-tools-capabilities-and-choose-one-that-best-meets-your-needs-and-budget": "Многие базовые инструменты временных меток доступны бесплатно и доступны онлайн. Однако некоторые расширенные инструменты с дополнительными функциями могут требовать подписки или единовременной покупки. Важно оценить возможности инструментов и выбрать тот, который лучше всего соответствует вашим потребностям и бюджету.",
+  "timestamp-multiple-formats": "Несколько форматов даты",
+  "timestamp-us": "Американский стиль",
+  "timestamp-eu": "Европейский стиль",
+  "timestamp-cn": "Китайский стиль",
+  "timestamp-jp": "Японский стиль",
+  "timestamp-common-timezones": "Популярные часовые пояса",
+  "timestamp-details": "Детали",
+  "timestamp-weekday": "День недели",
+  "timestamp-quarter": "Квартал",
+  "timestamp-week": "Номер недели",
+  "timestamp-day-of-year": "День года",
+  "timestamp-leap-year": "Високосный год",
+  "timestamp-yes": "Да",
+  "timestamp-no": "Нет",
+  "timestamp-from-now": "Сейчас",
+  "timestamp-days": "дней",
+  "timestamp-hours": "часов",
+  "timestamp-related-timestamps": "Связанные метки времени",
+  "timestamp-prev-day": "Предыдущий день",
+  "timestamp-next-day": "Следующий день",
+  "timestamp-prev-year": "Та же дата в прошлом году",
+  "timestamp-next-year": "Та же дата в следующем году",
+  "timezone-converter": "Конвертер часовых поясов",
+  "timezone-description": "Преобразование времени между различными часовыми поясами мира",
+  "from-timezone": "Из часового пояса",
+  "to-timezone": "В часовой пояс",
+  "enter-date-time": "Введите дату и время",
+  "convert": "Конвертировать",
+  "use-current-time": "Использовать текущее время",
+  "conversion-results": "Результаты конвертации",
+  "about-timezone-conversion": "О конвертации часовых поясов",
+  "common-use-cases": "Распространенные случаи использования:",
+  "tips": "Советы:",
+  "iso8601-converter": "Конвертер ISO 8601",
+  "iso8601-description": "Преобразование между форматом даты ISO 8601 и временными метками Unix",
+  "iso-to-timestamp": "ISO 8601 в временную метку",
+  "timestamp-to-iso": "Временная метка в ISO 8601",
+  "enter-iso-date": "Введите дату ISO 8601",
+  "enter-unix-timestamp": "Введите временную метку Unix",
+  "about-iso8601": "О ISO 8601",
+  "discord-title": "Генератор временных меток Discord",
+  "discord-description": "Генерация кодов временных меток Discord, которые корректно отображаются во всех часовых поясах",
+  "discord-datetime": "Выберите дату и время",
+  "discord-unix": "Или введите временную метку UNIX",
+  "discord-preview": "Предпросмотр",
+  "discord-tip": "Выберите дату или введите временную метку выше."
 } 
