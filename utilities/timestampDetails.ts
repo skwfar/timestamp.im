@@ -1,4 +1,4 @@
-import { format, getDay, getISOWeek, getQuarter, getDayOfYear, isLeapYear, differenceInCalendarDays, differenceInHours, differenceInCalendarYears, addDays, subDays, addYears, subYears, fromUnixTime, toDate, formatISO, formatRFC3339 } from 'date-fns';
+import { format, getDay, getISOWeek, getQuarter, getDayOfYear, isLeapYear, differenceInCalendarDays, differenceInHours, differenceInCalendarYears, addDays, subDays, addYears, subYears, addMonths, subMonths, addWeeks, subWeeks, addHours, subHours, startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfYear, endOfYear, fromUnixTime, toDate, formatISO, formatRFC3339 } from 'date-fns';
 import { toZonedTime, format as tzFormat } from 'date-fns-tz';
 
 export type TimestampDetails = {
@@ -22,6 +22,29 @@ export type TimestampDetails = {
     nextYear: number;
     prevMonth: number;
     nextMonth: number;
+    prevWeek: number;
+    nextWeek: number;
+    prevHour: number;
+    nextHour: number;
+    startOfDay: number;
+    endOfDay: number;
+    startOfWeek: number;
+    endOfWeek: number;
+    startOfMonth: number;
+    endOfMonth: number;
+    startOfYear: number;
+    endOfYear: number;
+    sameTimeLastWeek: number;
+    sameTimeNextWeek: number;
+    sameTimeLastMonth: number;
+    sameTimeNextMonth: number;
+    epochStart: number;
+    y2k: number;
+    millennium: number;
+    roundNumbers: {
+      nextRound: number;
+      prevRound: number;
+    };
   };
   formats: {
     iso: string;
@@ -54,13 +77,67 @@ export function getTimestampDetails(timestamp: number, opts?: { birthdayMode?: b
   const yearsFromNow = differenceInCalendarYears(date, now);
   const ageIfBirthday = opts?.birthdayMode ? differenceInCalendarYears(now, date) : 0;
 
-  // 相关时间戳
+  // 相关时间戳 - 大幅扩展
   const prevDay = Math.floor(addDays(date, -1).getTime() / 1000);
   const nextDay = Math.floor(addDays(date, 1).getTime() / 1000);
   const prevYear = Math.floor(addYears(date, -1).getTime() / 1000);
   const nextYear = Math.floor(addYears(date, 1).getTime() / 1000);
-  const prevMonth = Math.floor(addDays(date, -30).getTime() / 1000);
-  const nextMonth = Math.floor(addDays(date, 30).getTime() / 1000);
+  const prevMonth = Math.floor(addMonths(date, -1).getTime() / 1000);
+  const nextMonth = Math.floor(addMonths(date, 1).getTime() / 1000);
+  const prevWeek = Math.floor(addWeeks(date, -1).getTime() / 1000);
+  const nextWeek = Math.floor(addWeeks(date, 1).getTime() / 1000);
+  const prevHour = Math.floor(addHours(date, -1).getTime() / 1000);
+  const nextHour = Math.floor(addHours(date, 1).getTime() / 1000);
+  
+  // 时间边界
+  const startOfDayTs = Math.floor(startOfDay(date).getTime() / 1000);
+  const endOfDayTs = Math.floor(endOfDay(date).getTime() / 1000);
+  const startOfWeekTs = Math.floor(startOfWeek(date).getTime() / 1000);
+  const endOfWeekTs = Math.floor(endOfWeek(date).getTime() / 1000);
+  const startOfMonthTs = Math.floor(startOfMonth(date).getTime() / 1000);
+  const endOfMonthTs = Math.floor(endOfMonth(date).getTime() / 1000);
+  const startOfYearTs = Math.floor(startOfYear(date).getTime() / 1000);
+  const endOfYearTs = Math.floor(endOfYear(date).getTime() / 1000);
+  
+  // 相对时间
+  const sameTimeLastWeek = Math.floor(addDays(date, -7).getTime() / 1000);
+  const sameTimeNextWeek = Math.floor(addDays(date, 7).getTime() / 1000);
+  const sameTimeLastMonth = Math.floor(addMonths(date, -1).getTime() / 1000);
+  const sameTimeNextMonth = Math.floor(addMonths(date, 1).getTime() / 1000);
+  
+  // 特殊时间戳
+  const epochStart = 0; // Unix epoch
+  const y2k = 946684800; // 2000-01-01 00:00:00 UTC
+  const millennium = 32503680000; // 3000-01-01 00:00:00 UTC
+  
+  // 整数时间戳
+  const findNearestRoundNumber = (ts: number) => {
+    const str = ts.toString();
+    const len = str.length;
+    
+    // 寻找最近的整数（如1000000000, 1234567890等）
+    let nextRound = ts;
+    let prevRound = ts;
+    
+    if (len >= 8) {
+      // 向上取整到下一个10的幂
+      const power = Math.pow(10, len - 1);
+      nextRound = Math.ceil(ts / power) * power;
+      prevRound = Math.floor(ts / power) * power;
+      
+      // 如果相同，则寻找更大的整数
+      if (nextRound === ts) {
+        nextRound = ts + power;
+      }
+      if (prevRound === ts) {
+        prevRound = ts - power;
+      }
+    }
+    
+    return { nextRound, prevRound };
+  };
+  
+  const roundNumbers = findNearestRoundNumber(timestamp);
 
   // 多种格式
   const formats = {
@@ -102,6 +179,26 @@ export function getTimestampDetails(timestamp: number, opts?: { birthdayMode?: b
       nextYear,
       prevMonth,
       nextMonth,
+      prevWeek,
+      nextWeek,
+      prevHour,
+      nextHour,
+      startOfDay: startOfDayTs,
+      endOfDay: endOfDayTs,
+      startOfWeek: startOfWeekTs,
+      endOfWeek: endOfWeekTs,
+      startOfMonth: startOfMonthTs,
+      endOfMonth: endOfMonthTs,
+      startOfYear: startOfYearTs,
+      endOfYear: endOfYearTs,
+      sameTimeLastWeek,
+      sameTimeNextWeek,
+      sameTimeLastMonth,
+      sameTimeNextMonth,
+      epochStart,
+      y2k,
+      millennium,
+      roundNumbers,
     },
     formats,
     timezones,
