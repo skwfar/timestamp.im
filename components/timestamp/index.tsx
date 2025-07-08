@@ -9,6 +9,9 @@ import Button from '../ui/Button';
 import ResultTable from '../ui/ResultTable';
 import Code from "./code";
 import RandomTimestamp from "./random";
+import BatchConversion from "./batch";
+import TimezoneConverter from "./timezones";
+import TimestampValidator from "./validator";
 import Faq from "./faq";
 
 export default function Index() {
@@ -65,6 +68,9 @@ export default function Index() {
               className="border p-2 w-full mr-2"
               min="0"
             />
+            <div className="text-sm text-gray-600 mt-1">
+              {t('timestamp-precision-hint')}
+            </div>
           </div>
           <div className="flex-1 flex justify-center items-center flex-col">
             <div className="font-bold text-4xl"> {currentTimestamp}</div>
@@ -148,6 +154,18 @@ export default function Index() {
 
       <div className="overflow-x-auto">
         <Code/>
+      </div>
+
+      <div className="my-8">
+        <BatchConversion/>
+      </div>
+
+      <div className="my-8">
+        <TimezoneConverter/>
+      </div>
+
+      <div className="my-8">
+        <TimestampValidator/>
       </div>
 
       <div className="my-8">

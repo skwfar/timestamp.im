@@ -34,6 +34,22 @@ const Faq = () => {
     {
       question: t('are-timestamp-tools-free-to-use'),
       answer: t('many-basic-timestamp-tools-are-available-for-free-and-accessible-online-however-some-advanced-tools-with-additional-features-may-require-a-subscription-or-one-time-purchase-its-essential-to-evaluate-the-tools-capabilities-and-choose-one-that-best-meets-your-needs-and-budget')
+    },
+    {
+      question: t('year-2038-problem'),
+      answer: t('year-2038-explanation')
+    },
+    {
+      question: t('timestamp-formats-question'),
+      answer: t('timestamp-formats-explanation')
+    },
+    {
+      question: t('timestamp-validation-question'),
+      answer: t('timestamp-validation-explanation')
+    },
+    {
+      question: t('utc-vs-local-question'),
+      answer: t('utc-vs-local-explanation')
     }
   ];
 

@@ -22,7 +22,28 @@ export default function Code() {
       { name: 'Groovy', code: '(new Date().time / 1000).longValue()' },
       { name: 'Lua', code: 'os.time()' },
       { name: '.NET/C#', code: 'DateTimeOffset.UtcNow.ToUnixTimeSeconds();' },
-      { name: 'Dart', code: '(new DateTime.now().millisecondsSinceEpoch / 1000).truncate()' }
+      { name: 'Dart', code: '(new DateTime.now().millisecondsSinceEpoch / 1000).truncate()' },
+      { name: 'C++', code: 'std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()' },
+      { name: 'C', code: 'time(NULL)' },
+      { name: 'Perl', code: 'time()' },
+      { name: 'PowerShell', code: '[int][double]::Parse((Get-Date -UFormat %s))' },
+      { name: 'VB.NET', code: 'DateTimeOffset.UtcNow.ToUnixTimeSeconds()' },
+      { name: 'Scala', code: 'System.currentTimeMillis() / 1000' },
+      { name: 'Kotlin', code: 'System.currentTimeMillis() / 1000' },
+      { name: 'Rust', code: 'std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs()' },
+      { name: 'Haskell', code: 'import Data.Time.Clock.POSIX; getPOSIXTime >>= return . round' },
+      { name: 'R', code: 'as.numeric(Sys.time())' },
+      { name: 'MATLAB', code: 'posixtime(datetime("now"))' },
+      { name: 'Julia', code: 'time()' },
+      { name: 'Elixir', code: 'System.system_time(:second)' },
+      { name: 'Clojure', code: '(quot (System/currentTimeMillis) 1000)' },
+      { name: 'F#', code: 'DateTimeOffset.UtcNow.ToUnixTimeSeconds()' },
+      { name: 'Bash', code: 'date +%s' },
+      { name: 'PostgreSQL', code: 'SELECT extract(epoch from now())' },
+      { name: 'Oracle', code: 'SELECT (sysdate - date\'1970-01-01\') * 24 * 60 * 60 FROM dual' },
+      { name: 'Node.js', code: 'Math.floor(Date.now() / 1000)' },
+      { name: 'TypeScript', code: 'Math.floor(Date.now() / 1000)' },
+      { name: 'Delphi', code: 'DateTimeToUnix(Now)' }
     ];
 
     const copyToClipboard = (code: string, lang: string) => {
