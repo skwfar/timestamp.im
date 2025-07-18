@@ -79,6 +79,7 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
 
   return (
     <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
+        <h1 className="text-2xl font-bold my-6">{t('timestamp-converter')}</h1>
         <div className="mb-10 mt-4">
             <div className="flex flex-col md:flex-row mb-4 gap-4">
                 <div className="flex-1 flex justify-center items-center flex-col">
@@ -111,7 +112,7 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
       <div className="my-8">
         {/* 多种日期格式 */}
         <div className="mb-6">
-          <h3 className="font-bold text-xl mb-4">{t('timestamp-multiple-formats')}</h3>
+          <h2 className="font-bold text-xl mb-4">{t('timestamp-multiple-formats')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             <div className="p-3 bg-blue-50 rounded border">
               <span className="block text-gray-600 font-medium text-sm">ISO:</span>
@@ -142,7 +143,7 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
         
         {/* 常用时区 */}
         <div className="mb-6">
-          <h3 className="font-bold text-xl mb-4">{t('timestamp-common-timezones')}</h3>
+          <h2 className="font-bold text-xl mb-4">{t('timestamp-common-timezones')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {Object.entries(details.timezones).map(([tz, val]) => (
               <div key={tz} className="p-3 bg-yellow-50 rounded border">

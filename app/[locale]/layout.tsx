@@ -127,6 +127,8 @@ export default function RootLayout({
   children: React.ReactNode,
   params: { locale: string };
 },) {
+  const baseUrl = 'https://timestamp.im';
+  
   return (
     <html lang={locale} dir={dir(locale)} data-theme="light">
       <head>

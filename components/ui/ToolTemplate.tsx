@@ -16,7 +16,7 @@ const ToolTemplate: React.FC<ToolTemplateProps> = ({
 }) => {
   return (
     <div className={className}>
-      <h2 className="text-2xl font-bold my-6">{title}</h2>
+      <h1 className="text-2xl font-bold my-6">{title}</h1>
       {description && (
         <p className="text-gray-600 mb-6">{description}</p>
       )}
