@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 import Button from '../ui/Button';
 
@@ -37,7 +37,7 @@ export default function TimezoneConverter() {
     { value: 'Pacific/Auckland', label: 'Auckland (NZST/NZDT)' }
   ];
 
-  const convertToTimezones = (inputTimestamp: string) => {
+  const convertToTimezones = useCallback((inputTimestamp: string) => {
     const num = parseInt(inputTimestamp);
     if (isNaN(num)) return;
 
@@ -88,7 +88,7 @@ export default function TimezoneConverter() {
     });
 
     setTimezones(results);
-  };
+  }, [selectedTimezones]);
 
   const handleTimezoneChange = (timezone: string, checked: boolean) => {
     if (checked) {
@@ -108,7 +108,7 @@ export default function TimezoneConverter() {
     if (timestamp) {
       convertToTimezones(timestamp);
     }
-  }, [selectedTimezones, timestamp]);
+  }, [selectedTimezones, timestamp, convertToTimezones]);
 
   return (
     <div className="mb-10">

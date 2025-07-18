@@ -26,7 +26,7 @@ export default function TimestampDetails() {
     setCurrentTimestamp(current);
     
     // 从 URL 参数获取时间戳
-    const timestampParam = searchParams.get('timestamp') || searchParams.get('t');
+    const timestampParam = searchParams?.get('timestamp') || searchParams?.get('t');
     if (timestampParam) {
       setTimestamp(timestampParam);
       setInputValue(timestampParam);
@@ -45,7 +45,7 @@ export default function TimestampDetails() {
     setShowDetails(true);
     
     // 更新URL参数
-    const newSearchParams = new URLSearchParams(searchParams);
+    const newSearchParams = new URLSearchParams(searchParams || undefined);
     newSearchParams.set('timestamp', cleanValue);
     router.push(`/${locale}/t/details?${newSearchParams.toString()}`, { scroll: false });
   };
@@ -62,7 +62,7 @@ export default function TimestampDetails() {
     setShowDetails(true);
     
     // 更新URL参数
-    const newSearchParams = new URLSearchParams(searchParams);
+    const newSearchParams = new URLSearchParams(searchParams || undefined);
     newSearchParams.set('timestamp', current);
     router.push(`/${locale}/t/details?${newSearchParams.toString()}`, { scroll: false });
   };
@@ -87,6 +87,8 @@ export default function TimestampDetails() {
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <div className="flex-1">
                 <InputField
+                  label=""
+                  type="text"
                   value={inputValue}
                   onChange={handleInputChange}
                   placeholder={t('timestamp-input-placeholder')}
