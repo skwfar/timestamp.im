@@ -49,9 +49,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 
   // Generate alternate URLs for all locales
   const alternates = {
-    canonical: `${baseUrl}/${locale}`,
+    canonical: locale === 'en' ? baseUrl : `${baseUrl}/${locale}`,
     languages: Object.fromEntries(
-      i18nConfig.locales.map(lang => [lang, `${baseUrl}/${lang}`])
+      i18nConfig.locales.map(lang => [lang, lang === 'en' ? baseUrl : `${baseUrl}/${lang}`])
     )
   };
 
@@ -66,7 +66,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     openGraph: {
       type: 'website',
       locale: locale,
-      url: `${baseUrl}/${locale}`,
+      url: locale === 'en' ? baseUrl : `${baseUrl}/${locale}`,
       title,
       description,
       siteName: 'Timestamp.im',
@@ -121,7 +121,7 @@ export default function RootLayout({
           type="WebApplication"
           name="Timestamp.im"
           description="Free online Unix timestamp converter and date tools for developers"
-          url={`https://timestamp.im/${locale}`}
+          url={locale === 'en' ? baseUrl : `${baseUrl}/${locale}`}
         />
         <main>
           <GoogleAnalytics />
