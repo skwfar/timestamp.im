@@ -132,7 +132,9 @@ export default function RootLayout({
   return (
     <html lang={locale} dir={dir(locale)} data-theme="light">
       <head>
-        {/* <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" /> */}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7687969538448394" crossOrigin="anonymous"></script>
       </head>
       <body className={inter.className}>
