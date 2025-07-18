@@ -4,10 +4,8 @@ import ToDateTime from '../../../../components/timestamp/toDateTime';
 
 const i18nNamespaces = ['timestamp'];
 
-async function Home({ params }: { params: { locale: string, timestamp: string } }) {
+async function TimestampPage({ params }: { params: { locale: string, timestamp: string } }) {
   const { t, resources } = await initTranslations(params.locale, i18nNamespaces);
-  const timestampNumber = parseInt(params.timestamp);
-  const date = new Date(timestampNumber * 1000);
   
   return (
     <TranslationsProvider
@@ -49,9 +47,9 @@ export async function generateMetadata({ params }: { params: { locale: string, t
       description,
     },
     alternates: {
-      canonical: `https://timestamp.im/${params.locale}/t/${params.timestamp}`,
+      canonical: `https://timestamp.im/${params.locale}/t/details`,
     },
   };
 }
 
-export default Home;
+export default TimestampPage;

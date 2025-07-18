@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/t/discord',
     '/t/timezone',
     '/t/iso8601',
+    '/t/details',
     '/privacy',
     '/terms',
   ]

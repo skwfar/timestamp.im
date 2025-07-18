@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       index: true,
       follow: true,
     },
+    alternates: {
+      canonical: `https://timestamp.im/${params.locale}/t/timezone`,
+    },
   };
 }
 

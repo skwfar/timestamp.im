@@ -8,7 +8,7 @@ import { getTimestampDetails } from '../../utilities/timestampDetails';
 import Faq from "./faq";
 import { getHistoricalEvents, getTimestampMeaning } from '../../utilities/timestampAnalysis';
 
-export default function ToDateTime({ timestamp }: { timestamp: string }) {
+export default function ToDateTime({ timestamp, embedded = false }: { timestamp: string, embedded?: boolean }) {
   const { t } = useTranslation()
   const params = useParams();
   const locale = typeof params?.locale === 'string' ? params.locale : Array.isArray(params?.locale) ? params?.locale[0] : '';
@@ -78,8 +78,8 @@ export default function ToDateTime({ timestamp }: { timestamp: string }) {
   const timestampMeaning = getTimestampMeaning(Number(timestamp));
 
   return (
-    <div className="container mx-auto p-4 lg:w-1/2 xl:w-1/2">
-        <h1 className="text-2xl font-bold my-6">{t('timestamp-converter')}</h1>
+    <div className={embedded ? "" : "container mx-auto p-4 lg:w-1/2 xl:w-1/2"}>
+        <h1 className="text-2xl font-bold my-6 text-center">{t('timestamp-details')}</h1>
         <div className="mb-10 mt-4">
             <div className="flex flex-col md:flex-row mb-4 gap-4">
                 <div className="flex-1 flex justify-center items-center flex-col">
