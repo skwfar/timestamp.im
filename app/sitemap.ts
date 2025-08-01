@@ -11,6 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/t/timezone',
     '/t/iso8601',
     '/t/details',
+    '/blog',
+    '/about',
+    '/contact',
     '/privacy',
     '/terms',
   ]

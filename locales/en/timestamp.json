@@ -245,5 +245,19 @@
   "debug-applications": "Debug applications",
   "analyze-logs": "Analyze log files",
   "understand-timestamps": "Understand timestamps",
-  "convert-formats": "Convert between formats"
+  "convert-formats": "Convert between formats",
+  "monthly-active-users": "Monthly Users",
+  "timestamp-conversions": "Conversions Completed",
+  "supported-languages": "Languages Supported",
+  "availability": "Available",
+  "developer-tools": "Developer Tools",
+  "uptime": "Uptime",
+  "trusted-by-developers-worldwide": "Trusted by Developers Worldwide",
+  "stats-description": "Join developers who rely on our timestamp tools for their projects.",
+  "accuracy-guaranteed": "Accuracy Guaranteed",
+  "accuracy-description": "Our algorithms are tested extensively to ensure precise timestamp conversions.",
+  "privacy-focused": "Privacy First", 
+  "privacy-description": "All conversions happen locally in your browser. We don't store your data.",
+  "developer-friendly": "Developer Friendly",
+  "developer-description": "Built by developers, for developers. Simple, fast, and reliable tools."
 }

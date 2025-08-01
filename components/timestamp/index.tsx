@@ -13,6 +13,7 @@ import BatchConversion from "./batch";
 import TimezoneConverter from "./timezones";
 import TimestampValidator from "./validator";
 import Faq from "./faq";
+import SiteStats from "../ui/SiteStats";
 
 export default function Index() {
   const { t } = useTranslation();
@@ -166,6 +167,10 @@ export default function Index() {
 
       <div className="my-8">
         <TimestampValidator/>
+      </div>
+
+      <div className="my-8">
+        <SiteStats/>
       </div>
 
       <div className="my-8">

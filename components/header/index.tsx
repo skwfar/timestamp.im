@@ -62,7 +62,16 @@ const Header = async ({ locale }: { locale: string }) => {
                 <li>
                   <a href={`/${locale}/t/iso8601`}>ISO 8601 Converter</a>
                 </li>
-                {/* 以后可以在这里加更多工具 */}
+                <li className="divider"></li>
+                <li>
+                  <a href={`/${locale}/blog`}>Blog</a>
+                </li>
+                <li>
+                  <a href={`/${locale}/about`}>About</a>
+                </li>
+                <li>
+                  <a href={`/${locale}/contact`}>Contact</a>
+                </li>
               </ul>
             </div>
             <a className="btn btn-ghost text-xl" href={`/${locale}`}>
@@ -89,6 +98,15 @@ const Header = async ({ locale }: { locale: string }) => {
                 {/* 以后可以在这里加更多工具 */}
               </ul>
             </div>
+            <a href={`/${locale}/blog`} className="btn btn-ghost text-base font-medium px-4 rounded hover:bg-neutral-focus transition-colors">
+              Blog
+            </a>
+            <a href={`/${locale}/about`} className="btn btn-ghost text-base font-medium px-4 rounded hover:bg-neutral-focus transition-colors">
+              About
+            </a>
+            <a href={`/${locale}/contact`} className="btn btn-ghost text-base font-medium px-4 rounded hover:bg-neutral-focus transition-colors">
+              Contact
+            </a>
           </div>
           <div className="navbar-end">
             <LanguageChanger locale={locale} />
