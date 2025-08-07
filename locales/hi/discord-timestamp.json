@@ -1,9 +1,15 @@
 {
-  "discord-title": "Discord Timestamp Generator",
-  "discord-datetime": "Pick a date & time",
-  "discord-unix": "Or enter UNIX timestamp",
-  "discord-preview": "Preview",
-  "discord-tip": "Pick a date or enter a timestamp above.",
-  "copy": "Copy",
-  "copied": "Copied!"
+  "discord-title": "डिस्कॉर्ड टाइमस्टैम्प जेनेरेटर - डायनामिक टाइम कोड्स",
+  "discord-description": "डायनामिक समय प्रदर्शन के लिए डिस्कॉर्ड टाइमस्टैम्प कोड बनाएं। डिस्कॉर्ड सर्वर, इवेंट्स और घोषणाओं के लिए आदर्श।",
+  "discord-datetime": "तारीख और समय चुनें",
+  "discord-unix": "या UNIX टाइमस्टैम्प दर्ज करें",
+  "discord-preview": "डिस्कॉर्ड टाइमस्टैम्प कोड्स",
+  "discord-tip": "डिस्कॉर्ड कोड बनाने के लिए तारीख चुनें या टाइमस्टैम्प दर्ज करें।",
+  "copy": "कॉपी करें",
+  "copied": "कॉपी किया गया!",
+  "quick-times": "त्वरित समय",
+  "now": "अभी",
+  "tomorrow-9am": "कल सुबह 9 बजे",
+  "next-week-2pm": "अगले सप्ताह दोपहर 2 बजे",
+  "faq-title": "डिस्कॉर्ड टाइमस्टैम्प FAQ"
 } 
