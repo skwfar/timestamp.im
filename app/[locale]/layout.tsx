@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import i18nConfig from '@/i18nConfig';
 import { dir } from 'i18next';
 import GoogleAnalytics from "@/components/analytics/ga";
+import MicrosoftClarity from "@/components/analytics/clarity";
 import StructuredData from "@/components/seo/StructuredData";
 
 const inter = Inter({ subsets: ['latin'] })
@@ -146,6 +147,7 @@ export default function RootLayout({
         />
         <main>
           <GoogleAnalytics />
+          <MicrosoftClarity />
           <Header locale={locale}/>
           {children}
           <Footer />
