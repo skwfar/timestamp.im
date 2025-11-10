@@ -45,7 +45,7 @@ export default function TimestampDetails() {
     setShowDetails(true);
     
     // 更新URL参数
-    const newSearchParams = new URLSearchParams(searchParams || undefined);
+    const newSearchParams = new URLSearchParams(searchParams ? searchParams.toString() : undefined);
     newSearchParams.set('timestamp', cleanValue);
     router.push(`/${locale}/t/details?${newSearchParams.toString()}`, { scroll: false });
   };
@@ -62,7 +62,7 @@ export default function TimestampDetails() {
     setShowDetails(true);
     
     // 更新URL参数
-    const newSearchParams = new URLSearchParams(searchParams || undefined);
+    const newSearchParams = new URLSearchParams(searchParams ? searchParams.toString() : undefined);
     newSearchParams.set('timestamp', current);
     router.push(`/${locale}/t/details?${newSearchParams.toString()}`, { scroll: false });
   };
